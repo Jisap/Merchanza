@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
@@ -10,10 +10,38 @@ import { RiShoppingCart2Line } from 'react-icons/ri'
 const Header = () => {
 
   const [menuOpened, setMenuOpened] = useState(false);
-  const toggleMenu = () => setMenuOpened(!menuOpened)
+  const toggleMenu = () => setMenuOpened(!menuOpened);
+  const [header, setHeader] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if(window.scrollY > 0) {
+        // Close them menu if open when scroll occurs
+        if(menuOpened){
+          setMenuOpened(false)
+        }
+      }
+    }
+
+    const scrollYPos = window.addEventListener('scroll', () => {
+      window.scrollY > 50
+        ? setHeader(true)
+        : setHeader(false)
+    });
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener('scroll', scrollYPos);
+    }
+  }, [menuOpened]);
 
   return (
-    <header className='max-padd-container w-full z-50'>
+    <header className={`
+      ${header ? 'shadow-md !py-3' : ''}
+      sticky top-0 transition-all max-padd-container w-full bg-primary py-5 z-50
+    `}>
       <div className='flexBetween py-3'>
         
         {/* logo */}
@@ -38,11 +66,12 @@ const Header = () => {
             <Navbar containerStyles={`
               ${menuOpened 
                 ? "flex flex-col items-start gap-y-12 fixed top-20 right-8 p-12 bg-white rounded-3xl shadow-md w-64 medium-16 ring-1 ring-slate-900/5 transition-all duration-300 z-50" 
-              : "flex flex-col items-start gap-y-12 fixed top-20 p-12 bg-white rounded-3xl shadow-md w-64 medium-16 ring-1 ring-slate-900/5 transition-all duration-300 z-50 -right-[100%]"}
+                : "flex flex-col items-start gap-y-12 fixed top-20 p-12 bg-white rounded-3xl shadow-md w-64 medium-16 ring-1 ring-slate-900/5 transition-all duration-300 z-50 -right-[100%]"}
             `} />
           </div>
           {/* buttons */}
           <div className='flexBetween gap-x-3 sm:gap-x-2 bold-16'>
+            {/* Button mobileNav */}
             {!menuOpened ? (
               <MdMenu 
                 className='xl:hidden cursor-pointer text-3xl hover:text-secondary'
@@ -54,6 +83,7 @@ const Header = () => {
                 onClick={toggleMenu}
               />
             )}
+            {/* Button ShoppingCart */}
             <div className='flexBetween sm:gap-x-6'>
               <NavLink to={'/'} className='flex'>
                 <RiShoppingCart2Line  className='p-2 h-10 w-10 hover:text-secondary'/>
@@ -61,6 +91,7 @@ const Header = () => {
                   {0}
                 </span>
               </NavLink>
+              {/* Button login */}
               <NavLink to={'/'} className={'btn-secondary flexCenter gap-x-2 medium-16 rounded-xl'}>
                 <img src={user} alt='' height={19} width={19}/>
                 Login
