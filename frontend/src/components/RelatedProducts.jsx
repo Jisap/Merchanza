@@ -8,9 +8,9 @@ import { RiShoppingCart2Line } from 'react-icons/ri'
 const RelatedProducts = () => {
   return (
     <div>
-      <h4>Related Products</h4>
+      <h4 className='border-l-4 pl-2 border-secondary bold-20'>Related Products</h4>
       {/* container */}
-      <div>
+      <div className='mx-auto max-w-full'>
         <Swiper
           breakpoints={{
             600: {
@@ -26,6 +26,7 @@ const RelatedProducts = () => {
               spaceBetween: 30,
             },
           }}
+          className='h-[422px] sm:h-[477px] mt-5'
         >
           {
             LATEST.map((item, i) => (
