@@ -6,7 +6,7 @@ const About = () => {
   return (
     <section className='max-padd-container py-12 xl:py-32'>
       {/* container */}
-      <div className='flex flex-col xl:flex-row'>
+      <div className='flex flex-col gap-16 xl:gap-8 xl:flex-row'>
         
         {/* left */}
         <div className='flex-1'>
