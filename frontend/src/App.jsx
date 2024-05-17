@@ -10,7 +10,7 @@ import Footer from "./components/Footer"
 function App() {
  
   return (
-    <main className="text-tertiary h-[20000px]">
+    <main className="text-tertiary">
       <BrowserRouter>
         <Header />
         <Routes>
