@@ -5,24 +5,28 @@ import { Link } from 'react-router-dom'
 
 const Category = ({ banner, category }) => {
   return (
-    <section>
+    <section className='max-padd-container bg-primary'>
       <div>
-        <div>
-          <img src={banner} alt=""/>
+        {/* banner */}
+        <div className='pt-6'>
+          <img src={banner} alt="" className='block mb-7 mx-auto'/>
         </div>
-        <div>
+
+        {/* info banner */}
+        <div className='flexBetween my-10 mx-2'>
           <h5>
-          <span>
-            Showing 1-12
-          </span>
-          out of 36 products
+            <span className='font-bold'>
+              Showing 1-12 {' '}
+            </span>
+            out of 36 products
           </h5>
           <Link to={"/"}>
-            <VscSettings />
+            <VscSettings className='text-3xl bg-tertiary rounded-md h-10 w-10 p-2 text-white'/>
           </Link>
         </div>
+
         {/* container */}
-        <div>
+        <div className='grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 gap-y-28 mt-32 '>
           {all_products.map((item) => {
             if(category === item.category){
               return (
@@ -36,6 +40,9 @@ const Category = ({ banner, category }) => {
               )
             }
           })}    
+        </div>
+        <div className='py-16 text-center'>
+          <button className='btn-dark rounded-xl'>Load more</button>
         </div>
       </div>
     </section>
