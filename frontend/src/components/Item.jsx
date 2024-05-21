@@ -4,7 +4,7 @@ import { RiShoppingCart2Line } from 'react-icons/ri'
 
 const Item = ({ id, name, image, old_price, new_price }) => {
   return (
-    <Link to={''} className='bg-white p-4 rounded-xl relative'>
+    <Link to={`/product/${id}`} className='bg-white p-4 rounded-xl relative'>
       <div className='flexCenter'>
         <img 
           src={image} 
