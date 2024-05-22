@@ -22,9 +22,9 @@ const ProductDisplay = (props) => {
       </div>
 
       {/* right side */}
-      <div className="flex-col flex xl:flex-[1.5] bg-white py-2 rounded-xl">
-        <h3 className="h3">{product.name}</h3>
-        <div>
+      <div className="flex-col flex xl:flex-[1.5] px-5 bg-white py-2 rounded-xl">
+        <h3 className="h3 sm:line-clamp-1">{product.name}</h3>
+        <div className="flex items-start gap-x-2 medium-16">
           <FaStar />
           <FaStar />
           <FaStar />
@@ -32,16 +32,16 @@ const ProductDisplay = (props) => {
           <FaStar />
           <p>(223)</p>
         </div>
-        <div>
+        <div className="flex items-baseline gap-x-6 bold-28 sm:bold-32 mt-4">
           <div>${product.new_price}.00</div>
-          <div>${product.old_price}.00</div>
+          <div className="bold-20 sm:bold-28 line-throug text-secondary">${product.old_price}.00</div>
         </div>
         <div>
           {/* products colors and icons buttons*/}
-          <div>
+          <div className="flex flex-col sm:flex-row gap-x-10 gap-y-3 my-6">
             <div>
-              <h4>Select Color:</h4>
-              <div>
+              <h4 className="bold-16">Select Color:</h4>
+              <div className="flex gap-2 my-3">
                 <div className="ring-2 ring-slate-900 h-10 w-10 flexCenter cursor-pointer rounded-full bg-secondaryRed"></div>
                 <div className="ring-2 ring-slate-900 h-10 w-10 flexCenter cursor-pointer rounded-full bg-secondaryYellow"></div>
                 <div className="ring-2 ring-slate-900 h-10 w-10 flexCenter cursor-pointer rounded-full bg-secondaryBlue"></div>
@@ -49,8 +49,8 @@ const ProductDisplay = (props) => {
               </div>
             </div>
             <div>
-              <h4>Select Size:</h4>
-              <div>
+              <h4 className="bold-16">Select Size:</h4>
+              <div className="flex gap-3 my-3">
                 <div className="ring-2 ring-slate-900 h-10 w-10 flexCenter cursor-pointer rounded-md">S</div>
                 <div className="ring-2 ring-slate-900 h-10 w-10 flexCenter cursor-pointer rounded-md">M</div>
                 <div className="ring-2 ring-slate-900 h-10 w-10 flexCenter cursor-pointer rounded-md">L</div>
@@ -62,8 +62,8 @@ const ProductDisplay = (props) => {
             <button className="btn-dark rounded-md">Add to cart</button>
             <button className="btn-secondary rounded-md !px-4"><FaHeart /></button>
           </div>
-          <p><span>Category :</span> Women | Jacket | Winter</p>
-          <p><span>Tags :</span> Modern | New Arrivals </p>
+          <p><span className="medium-16 text-tertiary">Category :</span> Women | Jacket | Winter</p>
+          <p><span className="medium-16 text-tertiary">Tags :</span> Modern | New Arrivals </p>
         </div>
       </div>
     </section>
