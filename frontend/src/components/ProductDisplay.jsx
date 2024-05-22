@@ -22,7 +22,7 @@ const ProductDisplay = (props) => {
       </div>
 
       {/* right side */}
-      <div className="flex-col flex xl:flex-[1.5] px-5 bg-white py-2 rounded-xl">
+      <div className="flex-col flex xl:flex-[1.5] px-6 bg-white py-2 rounded-xl">
         <h3 className="h3 sm:line-clamp-1">{product.name}</h3>
         <div className="flex items-start gap-x-2 medium-16">
           <FaStar />

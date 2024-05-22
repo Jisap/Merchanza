@@ -31,7 +31,7 @@ const RelatedProducts = () => {
           {
             LATEST.map((item, i) => (
               <SwiperSlide key={i}>
-                <Link to={''} className='flexCenter gap-x-5 bg-white p-4 rounded-xl'>
+                <Link to={`/product/${item.id}`} onClick={window.scrollTo(0, 0)} className='flexCenter gap-x-5 bg-white p-4 rounded-xl'>
                   <img 
                     src={item.image} 
                     alt='' 
