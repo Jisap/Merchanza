@@ -7,6 +7,8 @@ import Footer from "./components/Footer"
 import electronicsBanner from "./assets/electronicsbanner.png"
 import cosmeticsBanner from "./assets/cosmeticsbanner.png"
 import clothingBanner from "./assets/clothingbanner.png"
+import Cart from "./pages/Cart"
+import Login from "./pages/Login"
 
 
 
@@ -24,8 +26,8 @@ function App() {
           <Route path="/product" element={<Product />} >
             <Route path=":productId" element={<Product />}/>
           </Route>
-          {/* <Route path="/cart-page" element={<Cart />} />
-          <Route path="/login" element={<Login />} /> */}
+          <Route path="/cart-page" element={<Cart />} /> 
+          <Route path="/login" element={<Login />} /> 
         </Routes>
         <Footer />
       </BrowserRouter>

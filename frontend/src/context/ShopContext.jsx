@@ -22,10 +22,15 @@ const ShopContextProvider = (props) => {
   }                                                                   // Para acceder al valor de ese pto utilizamos el identificador prev[itemId]
   
   const removeToCart = (itemId) => {
-    setCartItems((prev) => ({ ...prev, [itemId]: prev[itemid] - 1 }))
+    setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }))
   }
   
-  const contextValue = {all_products, cartItems, addToCart, removeToCart}
+  const contextValue = {
+    all_products, 
+    cartItems, 
+    addToCart, 
+    removeToCart
+  }
 
   return (
     <ShopContext.Provider value={contextValue}>
