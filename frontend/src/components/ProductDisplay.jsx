@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { FaStar, FaHeart } from 'react-icons/fa'
+import { ShopContext } from '../context/ShopContext';
 
 const ProductDisplay = (props) => {
 
   const { product } = props;
-
+  const { addToCart, cartItems } = useContext(ShopContext) 
+  console.log(cartItems)
+  
   return (
     <section className="max-padd-container flex flex-col gap-8 xl:flex-row bg-primary py-4">
       
@@ -59,7 +62,12 @@ const ProductDisplay = (props) => {
             </div>
           </div>
           <div className="flex gap-3 mb-8 max-w-[555px]">
-            <button className="btn-dark rounded-md">Add to cart</button>
+            <button 
+              className="btn-dark rounded-md"
+              onClick={() => addToCart(product.id)}
+            >
+                Add to cart
+            </button>
             <button className="btn-secondary rounded-md !px-4"><FaHeart /></button>
           </div>
           <p><span className="medium-16 text-tertiary">Category :</span> Women | Jacket | Winter</p>
