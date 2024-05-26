@@ -58,32 +58,32 @@ const CartItems = () => {
           </tbody>
         </table>
         {/* cart details */}
-        <div>
-          <div>
-            <h4>Summary</h4>
+        <div className="flex flex-col justify-between gap-y-16 mt-10 p-8 md:flex-row rounded-md w-full max-w-[777px]">
+          <div className="flex flex-col gap-8">
+            <h4 className="bold-22">Summary</h4>
             <div>
-              <div>
-                <h4>Subtotal:</h4>
-                <h4>${0}</h4>
+              <div className="flexBetween py-4">
+                <h4 className="medium-16">Subtotal:</h4>
+                <h4 className="text-gray-30 font-semibold">${0}</h4>
               </div>
               <hr />
-              <div>
-                <h4>Shipping Fee:</h4>
-                <h4>Free</h4>
+              <div className="flexBetween py-4">
+                <h4 className="medium-16">Shipping Fee:</h4>
+                <h4 className="text-gray-30 font-semibold">Free</h4>
               </div>
               <hr />
-              <div>
-                <h4>Total:</h4>
-                <h4>${0}</h4>
+              <div className="flexBetween py-4">
+                <h4 className="medium-18">Total:</h4>
+                <h4 className="bold-18">${0}</h4>
               </div>
             </div>
-            <button>Checkout</button>
+            <button className="btn-dark w-44 rounded-xl">Checkout</button>
           </div>
-          <div>
-            <h4>Your coupon code enter here</h4>
-            <div>
-              <input type="text" placeholder="Coupon code"/>
-              <button>Submit</button>
+          <div className="flex flex-col gap-10">
+            <h4 className="bold-20 capitalize">Your coupon code enter here</h4>
+            <div className="flexBetween pl-5 h-[3.3rem] bg-white ring-1 ring-slate-900/10 w-full max-w-[366px] rounded-xl">
+              <input type="text" placeholder="Coupon code" className="bg-transparent border-none outline-none"/>
+              <button className="btn-dark rounded-lg relative right-[0.33rem]">Submit</button>
             </div>
           </div>
         </div>
