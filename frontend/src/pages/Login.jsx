@@ -5,10 +5,10 @@ const Login = () => {
   const [state, setstate] = useState("Sign Up");
   
   return (
-    <section>
-      <div>
-        <h3>{state}</h3>
-        <div>
+    <section className="max-padd-container flexCenter flex-col pt-32 bg-primary">
+      <div className="w-full max-w-[666px] bg-primary m-auto px-14 py-10 rounded-md">
+        <h3 className="h3">{state}</h3>
+        <div className="flex flex-col gap-4 mt-7">
           {state === "Sign Up" 
             ? <input 
                 name="username" 
@@ -34,21 +34,19 @@ const Login = () => {
         <button className="btn-dark rounded-xl my-5 !py-1">Continue</button>
       
         {state === "Sign Up" 
-          ? <p>Alreadt have an account ? 
+          ? <p className="text-black font-bold">Already have an account ? {' '}
               <span onClick={() => setstate("Login")} className="text-secondary underline cursor-pointer">Login</span>
             </p> 
-          : <p className="text-black font-bold">Create an account ? 
+          : <p className="text-black font-bold">Create an account ? {' '}
               <span onClick={() => setstate("Sign Up")} className="text-secondary underline cursor-pointer">Click here</span>
             </p>
         }
       
-        <div>
+        <div className="flexStart mt-6 gap-3">
           <input type="checkbox" name="" id="" />
-          <p>By coninuing, i agree the terms of use & privacy policy.</p>
+          <p>By continuing, i agree the terms of use & privacy policy.</p>
         </div>
-
       </div>
-
     </section>
   )
 }
