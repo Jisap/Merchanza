@@ -6,7 +6,7 @@ import { TbTrash } from 'react-icons/tb'
 
 const CartItems = () => {
 
-  const { all_products, cartItems, removeToCart, getTotalCartAmount } = useContext(ShopContext)
+  const { all_products, cartItems, removeToCart, getTotalCartAmount, getTotalCartItems } = useContext(ShopContext)
 
   return (
     <section className="max-padd-container bg-primary rounded-3xl">

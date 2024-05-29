@@ -28,22 +28,31 @@ const ShopContextProvider = (props) => {
   const getTotalCartAmount = () => {
     let totalAmount = 0;
     for (const item in cartItems) {                                                     // item son claves (identificadores id)
-      if (cartItems[item] > 0) {                                                         // cartItem[item] es el valor (cantidad) del producto agregado
-        //console.log(cartItem[item])
+      if (cartItems[item] > 0) {                                                        // cartItem[item] es el valor (cantidad) del producto agregado
         let itemInfo = all_products.find((product) => product.id === Number(item));     // Se busca en all_products ese producto 
         totalAmount += itemInfo.new_price * cartItems[item]                             // totalAmount = pto agregado * cantidad de ese pto  
       }
     }
     return totalAmount;
-    //console.log(totalAmount)
   }
-  
+
+  const getTotalCartItems = () => {
+    let totalItem = 0;
+    for(const item in cartItems){
+      if(cartItems[item] > 0){
+        totalItem += cartItems[item]                                                    // Aquí se suman los ptos agregados
+      }
+    }
+    return totalItem;
+  }
+   
   const contextValue = {
     all_products, 
     cartItems, 
     addToCart, 
     removeToCart,
     getTotalCartAmount,
+    getTotalCartItems,
   }
 
   return (
