@@ -1,5 +1,6 @@
 import React, { createContext, useState } from 'react'
 import all_products from '../assets/all_products'
+import CartItems from '../components/CartItems';
 
 export const ShopContext = createContext(null)
 
@@ -15,6 +16,16 @@ const ShopContextProvider = (props) => {
 
   const [cartItems, setCartItems] = useState(getDefaultCart());
   
+  const getTotalCartAmount = () => {
+    let totalAmount = 0;
+    for ( const item in CartItems ){                                                    // item son claves (identificadores id)
+      if(cartItem[item] > 0){                                                           // cartItem[item] es el valor (cantidad) del producto agregado
+        let itemInfo = all_products.find((product) => product.id === Number(item));     // Se busca en all_products ese producto 
+        totalAmount += itemInfo.new_price * cartItems[item]                             // totalAmount = pto agregado * cantidad de ese pto  
+      }
+    }
+    return totalAmount;
+  }
   
   const addToCart = (itemId) => {
     setCartItems((prev) => ({...prev, [itemId]:prev[itemId] + 1}))    // prev hace referencia al valor del estado e itemId al id del pto
@@ -29,7 +40,8 @@ const ShopContextProvider = (props) => {
     all_products, 
     cartItems, 
     addToCart, 
-    removeToCart
+    removeToCart,
+    getTotalCartAmount,
   }
 
   return (
