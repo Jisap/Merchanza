@@ -16,17 +16,6 @@ const ShopContextProvider = (props) => {
 
   const [cartItems, setCartItems] = useState(getDefaultCart());
   
-  const getTotalCartAmount = () => {
-    let totalAmount = 0;
-    for ( const item in CartItems ){                                                    // item son claves (identificadores id)
-      if(cartItem[item] > 0){                                                           // cartItem[item] es el valor (cantidad) del producto agregado
-        let itemInfo = all_products.find((product) => product.id === Number(item));     // Se busca en all_products ese producto 
-        totalAmount += itemInfo.new_price * cartItems[item]                             // totalAmount = pto agregado * cantidad de ese pto  
-      }
-    }
-    return totalAmount;
-  }
-  
   const addToCart = (itemId) => {
     setCartItems((prev) => ({...prev, [itemId]:prev[itemId] + 1}))    // prev hace referencia al valor del estado e itemId al id del pto
     //console.log(cartItems)
@@ -34,6 +23,19 @@ const ShopContextProvider = (props) => {
   
   const removeToCart = (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }))
+  }
+
+  const getTotalCartAmount = () => {
+    let totalAmount = 0;
+    for (const item in cartItems) {                                                     // item son claves (identificadores id)
+      if (cartItems[item] > 0) {                                                         // cartItem[item] es el valor (cantidad) del producto agregado
+        //console.log(cartItem[item])
+        let itemInfo = all_products.find((product) => product.id === Number(item));     // Se busca en all_products ese producto 
+        totalAmount += itemInfo.new_price * cartItems[item]                             // totalAmount = pto agregado * cantidad de ese pto  
+      }
+    }
+    return totalAmount;
+    //console.log(totalAmount)
   }
   
   const contextValue = {

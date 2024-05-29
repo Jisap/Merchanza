@@ -6,7 +6,7 @@ const ProductDisplay = (props) => {
 
   const { product } = props;
   const { addToCart, cartItems } = useContext(ShopContext) 
-  console.log(cartItems)
+  //console.log(cartItems)
   
   return (
     <section className="max-padd-container flex flex-col gap-8 xl:flex-row bg-primary py-4">
