@@ -6,7 +6,7 @@ import AddProduct from '../components/AddProduct'
 
 const Admin = () => {
   return (
-    <div>
+    <div className='lg:flex'>
       <Sidebar />
       <Routes>
         <Route path='/addproduct' element={<AddProduct />} />
