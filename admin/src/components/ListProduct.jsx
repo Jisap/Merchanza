@@ -5,7 +5,7 @@ import { TbTrash } from 'react-icons/tb'
 const ListProduct = () => {
   
   const [allProducts, setAllProducts] = useState([]);
-
+console.log(allProducts)
   const fetchInfo =async () => {
     await fetch('http://localhost:4000/allproducts').then((res) => res.json()).then((data) => {setAllProducts(data)})
   };

@@ -66,6 +66,10 @@ const Product = mongoose.model("Product",  {
     type: Number,
     required: true,
   },
+  category: {
+    type: String,
+    required: true
+  },
   date: {
     type: Date,
     default: Date.now,
@@ -119,9 +123,9 @@ app.post("/removeproduct", async(req, res) => {
 //Creating API for getting all products
 app.get("/allproducts", async(req, res) => {
   let products = await Product.find({})
-  console.log("All products fetched")
+  console.log("All products fetched", products)
   res.send(products)
-})
+});
 
 
 app.listen(port, (error) => {
