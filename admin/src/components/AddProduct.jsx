@@ -14,34 +14,34 @@ const AddProduct = () => {
     old_price: '',
   });
   
-  const imageHandler = (e) => {
+  const imageHandler = (e) => {                                               // Establece el estado con la imagen seleccionada
     setImage(e.target.files[0])
   }
 
   const changeHandler = (e) => {
-    setProductDetails({ ...productDetails, [e.target.name]:e.target.value })
+    setProductDetails({ ...productDetails, [e.target.name]:e.target.value }) // Establece el estado del pto con los valores de los inputs
   }
 
   const Add_Product = async () => {
     console.log(productDetails)
     let responseData;
-    let product = productDetails;
-    let formData = new FormData();
-    formData.append('product', image);
+    let product = productDetails;         // product = estado de productDetails          
+    let formData = new FormData();        // conjunto de pares clave/valor
+    formData.append('product', image);    // a formData se le agrega la imagen temporal del input
 
-    await fetch('http://localhost:4000/upload', {
+    await fetch('http://localhost:4000/upload', {   // Subida al servidor de la imagen incluida en el formData
       method: 'POST',
       headers: {
         Accept: 'application/json',
       },
       body: formData,
 
-    }).then((resp) => resp.json()).then((data) => { responseData = data })
-    if(responseData.success){
-      product.image = responseData.image_url
+    }).then((resp) => resp.json()).then((data) => { responseData = data })    // El servidor da como respuesta una url
+    if(responseData.success){                                                 // Si la imagen se subio exitosamente
+      product.image = responseData.image_url                                  // el valor de product.image = a esa nueva url en el servidor
       console.log(product)
 
-      await fetch('http://localhost:4000/addproduct', {
+      await fetch('http://localhost:4000/addproduct', {                       // También añadimos el resto de props del producto
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -105,7 +105,7 @@ const AddProduct = () => {
       <div>
         <label htmlFor='file-input'>
           <img 
-            src={image?URL.createObjectURL(image):upload_area}
+            src={image?URL.createObjectURL(image):upload_area} // Si la imagen se selecciono se crea una URL temporal ligada al objeto file o blob
             alt='' 
             className='w-20 rounded-sm inline-block'
           />
