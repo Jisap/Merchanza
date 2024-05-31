@@ -127,6 +127,58 @@ app.get("/allproducts", async(req, res) => {
   res.send(products)
 });
 
+// Schema Creating for User Model
+const User = mongoose.model('User', {
+  name: {
+    type: String,
+  },
+  email: {
+    type: String,
+    unique: true,
+  },
+  password: {
+    type: String,
+  },
+  cartData: {
+    type: Object,
+  },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+//Creating endpoint for registering user
+app.post('/signup', async(req, res) => {                      // Endpoint para crear un nuevo usuario
+  let check = await User.findOne({email: req.body.email});    // Comprobamos que el usuario existe en bd 
+  if(check){                                                  // Si existe mensaje de error avisando de que el usario ya existe
+    return res.status(400).json({
+      success: false,
+      errors: 'Existing user found with same email',
+    });
+  }
+  let cart = {};                                              // Sino existe inicializamos el carrito como un objeto vacio    
+  for(let i=0; i<300; i++){                                   // de 299 posiciones
+    cart[i] = 0
+  }
+  const user = new User({                                     // Creamos una nueva instancia del modelo User
+    name: req.body.name,                                      // con el contenido del formulario de signup
+    email: req.body.email,
+    password: req.body.password,
+    cartData: cart,
+  })
+
+  await user.save();                                           // Se graba en bd el usuario 
+  const data ={                                                // id del usuario dado por bd 
+    user: {
+      id: user.id,
+    },
+  };
+
+  const token = jwt.sign(data, "secret_ecom")                  // creamos un jwt en base a ese id     
+  res.json({success: true, token})                             // que se devuelve en la respuesta
+})
+
 
 app.listen(port, (error) => {
   if(!error){
