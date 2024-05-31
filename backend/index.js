@@ -168,15 +168,35 @@ app.post('/signup', async(req, res) => {                      // Endpoint para c
     cartData: cart,
   })
 
-  await user.save();                                           // Se graba en bd el usuario 
-  const data ={                                                // id del usuario dado por bd 
+  await user.save();                                          // Se graba en bd el usuario 
+  const data ={                                               // id del usuario dado por bd 
     user: {
       id: user.id,
     },
   };
 
-  const token = jwt.sign(data, "secret_ecom")                  // creamos un jwt en base a ese id     
-  res.json({success: true, token})                             // que se devuelve en la respuesta
+  const token = jwt.sign(data, "secret_ecom")                 // creamos un jwt en base a ese id     
+  res.json({success: true, token})                            // que se devuelve en la respuesta
+});
+
+//Creating endpoint for user login
+app.post('/login', async(req, res) => {
+  let user = await User.findOne({ email: req.body.email})     // Buscamos un usuario en bd en base al email del body   
+  if(user){                                                   // Si existe
+    const passMatch = req.body.password === user.password;    // comprobamos que la pass proporcionada coincida con la de la bd
+    if(passMatch){                                            // Si coincide
+      const data = {                                          // Establecemos la data como el id del usuario
+        user: {
+          id: user.id,
+        },
+      };
+      const token = jwt.sign(data, "secret_ecom");            // Obtenemos el token asociado al id según secret
+      res.json({success: true, token});                       // y devolvemos dicho token
+
+    }else{
+      res.json({success:false, errors: "Wrong Password"});
+    }
+  }
 })
 
 
