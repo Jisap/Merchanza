@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
+import logout from '../assets/logout.svg'
 import user from '../assets/user.svg';
 import Navbar from './Navbar';
 import { MdMenu, MdClose } from 'react-icons/md'
@@ -95,10 +96,25 @@ const Header = () => {
                 </span>
               </NavLink>
               {/* Button login */}
-              <NavLink to={'/login'} className={'btn-secondary flexCenter gap-x-2 medium-16 rounded-xl'}>
-                <img src={user} alt='' height={19} width={19}/>
-                Login
-              </NavLink>
+              { localStorage.getItem('auth-token') ? (
+                <NavLink 
+                  to={'/logout'}
+                  onClick={() => {localStorage.removeItem('auth-token'); window.location.replace('/')}} 
+                  className={'btn-secondary flexCenter gap-x-2 medium-16 rounded-xl'}
+                >
+                  <img src={logout} alt='' height={19} width={19} />
+                  Logout
+                </NavLink>
+              ):(
+                <NavLink 
+                  to={'/login'} 
+                  className={'btn-secondary flexCenter gap-x-2 medium-16 rounded-xl'}
+                >
+                  <img src={user} alt='' height={19} width={19}/>
+                  Login
+                </NavLink>
+              )
+              }
             </div>
           </div>
         </div>

@@ -15,7 +15,24 @@ const Login = () => {
 
 
   const login = async () => {
-    console.log("Login function executed", formData)
+    console.log("Login function executed", formData);
+    let responseData;
+    await fetch('http://localhost:4000/login', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/formData',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData)
+    }).then((response) => response.json()).then((data) => responseData = data)
+
+    if (responseData.success) {
+      localStorage.setItem('auth-token', responseData.token);
+      window.location.replace('/');
+    } else {
+      alert(responseData.errors)
+    }
+    
   };
 
   const signup = async () => {
@@ -73,7 +90,7 @@ const Login = () => {
         </div>
         <button 
           className="btn-dark rounded-xl my-5 !py-1"
-          onClick={() => { state==="login" ? login() : signup()}}
+          onClick={() => { state==="Login" ? login() : signup()}}
         >
           Continue
         </button>
