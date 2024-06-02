@@ -32,15 +32,39 @@ const ShopContextProvider = (props) => {
         body: "",
       }).then((response) => response.json()).then((data) => setCartItems(data));
     }
-  }, [])
+  }, []);
 
-  const addToCart = (itemId) => {
+
+  const addToCart = (itemId) => {     // actualiza el estado
     setCartItems((prev) => ({...prev, [itemId]:prev[itemId] + 1}))    // prev hace referencia al valor del estado e itemId al id del pto
-    //console.log(cartItems)
-  }                                                                   // Para acceder al valor de ese pto utilizamos el identificador prev[itemId]
+                                                                      // Para acceder al valor de ese pto utilizamos el identificador prev[itemId]
+    if(localStorage.getItem('auth-token')){
+      fetch('http://localhost:4000/addtocart', {                      // llama al endpoint /addtocart -> actualiza bd
+        method: 'POST',
+        headers: {
+          Accept: 'application/form-data',
+          'auth-token': `${localStorage.getItem('auth-token')}`,      // enviando el token (contiene el id del usuario)
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ "itemId": itemId })                    // y el id del producto que se añade al carrito
+      }).then((response) => response.json()).then((data) => console.log(data))
+    }
+  }                                                                   
   
   const removeToCart = (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }))
+
+    if (localStorage.getItem('auth-token')) {
+      fetch('http://localhost:4000/removefromcart', {                      // llama al endpoint /addtocart -> actualiza bd
+        method: 'POST',
+        headers: {
+          Accept: 'application/form-data',
+          'auth-token': `${localStorage.getItem('auth-token')}`,      // enviando el token (contiene el id del usuario)
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ "itemId": itemId })                    // y el id del producto que se resta del carrito
+      }).then((response) => response.json()).then((data) => console.log(data))
+    }
   }
 
   const getTotalCartAmount = () => {
