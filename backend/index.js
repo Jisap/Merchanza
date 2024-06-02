@@ -123,7 +123,7 @@ app.post("/removeproduct", async(req, res) => {
 //Creating API for getting all products
 app.get("/allproducts", async(req, res) => {
   let products = await Product.find({})
-  console.log("All products fetched", products)
+  console.log("All products fetched")
   res.send(products)
 });
 
@@ -199,7 +199,24 @@ app.post('/login', async(req, res) => {
   }else{
     res.json({success:false, errors: "Wrong Email address"});
   }
+});
+
+// Creating endpoint for newcollection data
+app.get('/newCollections', async (req, res) => {
+  let products = await Product.find({});
+  let newcollection = products.slice(1).slice(-8); // Esto toma los últimos 8 productos del array resultante de la operación anterior.
+  console.log("New Collection fetched")
+  res.send(newcollection)
 })
+
+// Creating endpoint for popularProducts in clothing
+app.get('/popularproducts', async (req, res) => {
+  let products = await Product.find({category: 'clothing'});
+  let popularproducts = products.slice(0, 4); // Esto toma los últimos 4 primeros productos de la categoría clothing.
+  console.log("Popularproducts fetched")
+  res.send(popularproducts)
+})
+ 
 
 
 app.listen(port, (error) => {
